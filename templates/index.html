@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Index - OnePage Bootstrap Template</title>
+  <title>Index - Onepage Bootstrap Template</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -78,7 +78,11 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="#about">Get Started</a>
+      {% if user.is_authenticated %}
+      <a class="btn-getstarted" href="logout">Logout</a>
+      {% else %}
+      <a class="btn-getstarted" href="login">Login or Signup</a>
+      {% endif %}
 
     </div>
   </header>
@@ -93,7 +97,12 @@
       <div class="container">
         <div class="row justify-content-center" data-aos="zoom-out">
           <div class="col-xl-7 col-lg-9 text-center">
+            {% if user.is_authenticated %}
+            <h1>Welcome, {{user.username}}</h1>
+            {% else %}
             <h1>One Page Bootstrap Website Template</h1>
+            {% endif %}
+
             <p>We are team of talented designers making websites with Bootstrap</p>
           </div>
         </div>
@@ -110,8 +119,8 @@
               <h4 class="title"><a href="">{{feature.name}}</a></h4>
               <p class="description">{{feature.details}}</p>
 
-              {% if feature.is_true == True %}
-              <p class="description">This feature is true</p>
+              {% if feature.name == 'Quick' %}
+              <p class="description">This feature says our site is quick</p>
               {% endif %}
 
             </div>
